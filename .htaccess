@@ -1,0 +1,15 @@
+# Deny access to filenames starting with dot(.)
+<FilesMatch "^\.">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+# Deny access to files with certain extensions
+<FilesMatch "\.(sql)$">
+Order allow,deny
+Deny from all
+
+</FilesMatch>
+
+# Disable directory browsing
+Options -Indexes
