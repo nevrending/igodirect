@@ -6,5 +6,10 @@
         "gilbitron/easycsrf": "^1.4",
         "pragmarx/google2fa-qrcode": "^3.0",
         "bacon/bacon-qr-code": "^2.0"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
     }
 }
