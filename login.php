@@ -1,3 +1,5 @@
+<?php require __DIR__ . '/middlewares/session.php'; ?>
+<?php require __DIR__ . '/middlewares/csrf.php'; ?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -18,22 +20,34 @@
     </head>
     <body class="text-center">
         <main class="form-signin">
-            <form>
+            <form method="POST" action="controllers/login.php" class="needs-validation" novalidate>
+                <input type="hidden" name="_token" value="<?php echo $easyCSRF->generate('_token') ?>">
                 <img class="mb-4" src="assets/img/logo-yeftacom.png" alt="" width="150" height="150">
                 <h1 class="h3 mb-3 fw-normal">Login</h1>
-
+                <?php include __DIR__ . '/includes/alerts.inc.php' ?>
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com" required>
+                    <label for="email">Email</label>
+                    <div class="invalid-feedback mb-3">
+                        The email field is required.
+                    </div>
                 </div>
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="examplepassword" required>
+                    <label for="password">Password</label>
+                    <div class="invalid-feedback mb-3">
+                        The password field is required.
+                    </div>
                 </div>
 
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+                <p class="mt-3"><a href="register.php">Don't have an account? Register now! &rarr;</a></p>
                 <p class="mt-5 mb-3 text-muted">&copy; 2021 Yefta.com</p>
             </form>
         </main>
+
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/jquery-3.6.0.min.js"></script>
+        <script src="assets/js/form-validation.js"></script>
     </body>
 </html>

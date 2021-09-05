@@ -1,3 +1,5 @@
+<?php require __DIR__ . '/middlewares/session.php'; ?>
+<?php require __DIR__ . '/middlewares/authenticated.php'; ?>
 <!doctype html>
 <html lang="en" class="h-100">
     <head>
@@ -20,17 +22,26 @@
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
             <header class="mb-auto">
                 <div>
-                    <h3 class="float-md-start mb-0">Hello!</h3>
+                    <h3 class="float-md-start mb-0">Hello <?php echo $_SESSION["user"]->name ?>!</h3>
                     <nav class="nav nav-masthead justify-content-center float-md-end">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="logout.php">Logout</a>
                     </nav>
                 </div>
             </header>
 
             <main class="px-3">
-                <h1>Hi there!</h1>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h1>Welcome back <?php echo $_SESSION["user"]->name ?>!</h1>
+                <p class="lead">Your details</p>
+                <p><?php // var_dump($_SESSION) ?></p>
+                <ul class="text-start">
+                    <li>User ID: <?php echo $_SESSION["user"]->id ?></li>
+                    <li>Name: <?php echo $_SESSION["user"]->name ?></li>
+                    <li>Email: <?php echo $_SESSION["user"]->email ?></li>
+                    <li>Address: <?php echo $_SESSION["user"]->address ?></li>
+                    <li>Attached File: <?php echo substr($_SESSION["user"]->file_path, 11) ?></li>
+                    <li><embed src="<?php echo substr($_SESSION["user"]->file_path, 3) ?>" width="100%"></li>
+                </ul>
                 <!-- <p class="lead">
                     <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">A button</a>
                 </p> -->

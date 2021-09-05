@@ -1,3 +1,6 @@
+<?php require __DIR__ . '/middlewares/session.php'; ?>
+<?php require __DIR__ . '/middlewares/csrf.php'; ?>
+<?php require __DIR__ . '/helpers/functions.php'; ?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -19,19 +22,22 @@
     <body class="bg-light">
         <div class="container">
             <main>
-                <div class="py-5 text-center">
+                <div class="py-3 text-center">
                     <img class="d-block mx-auto mb-4" src="assets/img/logo-yeftacom.png" alt="" width="150" height="150">
                     <h2>Registration Form</h2>
                     <p class="lead">All fields are required.</p>
+                    <p><a href="login.php">Already have an account? Login now! &rarr;</a></p>
                 </div>
 
                 <div class="row g-5">
                     <div class="col-12 col-lg-8 offset-lg-2">
-                        <form class="needs-validation" novalidate>
+                        <?php include __DIR__ . '/includes/alerts.inc.php' ?>
+                        <form method="POST" action="controllers/register.php" enctype="multipart/form-data" class="needs-validation" novalidate>
+                            <input type="hidden" name="_token" value="<?php echo $easyCSRF->generate('_token') ?>">
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="full_name" class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" id="full_name" placeholder="" value="" required>
+                                    <input type="text" class="form-control" name="full_name" id="full_name" required>
                                     <div class="invalid-feedback">
                                         The full name field is required.
                                     </div>
@@ -39,7 +45,7 @@
 
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com" required>
                                     <div class="invalid-feedback">
                                         Please enter a valid email address.
                                     </div>
@@ -47,7 +53,7 @@
 
                                 <div class="col-12">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="" value="" required>
+                                    <input type="password" class="form-control" name="password" id="password" required>
                                     <div class="invalid-feedback">
                                         The password field is required.
                                     </div>
@@ -55,7 +61,7 @@
 
                                 <div class="col-12">
                                     <label for="password_confirmation" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="password_confirmation" placeholder="" value="" required>
+                                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required>
                                     <div class="invalid-feedback">
                                         The password confirmation does not match.
                                     </div>
@@ -63,16 +69,17 @@
 
                                 <div class="col-12">
                                     <label for="address" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                                    <input type="text" class="form-control" name="address" id="address" placeholder="1234 Main St" required>
                                     <div class="invalid-feedback">
                                         Please enter a valid address.
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                  <label for="a_file" class="form-label">Attach Something</label>
-                                  <input type="file" class="form-control" id="a_file" accept=".jpg,.jpeg,.png,.pdf" required>
-                                  <div class="invalid-feedback">
+                                    <?php const ONE_MB_IN_BYTES = 1048576 ?>
+                                    <label for="attach_something" class="form-label">Attach Something <small>(Max size: <?php echo bcdiv(file_upload_max_size(), ONE_MB_IN_BYTES) ?> MB)</small></label>
+                                    <input type="file" class="form-control" name="attach_something" id="attach_something" accept=".jpg,.jpeg,.png,.pdf" required>
+                                    <div class="invalid-feedback">
                                         Please attach a JPEG, PNG, or PDF file.
                                     </div>
                                 </div>
