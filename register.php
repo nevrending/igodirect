@@ -1,3 +1,4 @@
+<?php require __DIR__ . '/middlewares/dotenv.php'; ?>
 <?php require __DIR__ . '/middlewares/session.php'; ?>
 <?php require __DIR__ . '/middlewares/csrf.php'; ?>
 <?php require __DIR__ . '/helpers/functions.php'; ?>
@@ -76,7 +77,7 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <?php const ONE_MB_IN_BYTES = 1048576 ?>
+                                    <?php const ONE_MB_IN_BYTES = 1048576; ?>
                                     <label for="attach_something" class="form-label">Attach Something <small>(Max size: <?php echo bcdiv(file_upload_max_size(), ONE_MB_IN_BYTES) ?> MB)</small></label>
                                     <input type="file" class="form-control" name="attach_something" id="attach_something" accept=".jpg,.jpeg,.png,.pdf" required>
                                     <div class="invalid-feedback">
@@ -100,6 +101,8 @@
 
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/jquery-3.6.0.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $_ENV['MAPS_API_KEY'] ?>&libraries=places"></script>
         <script src="assets/js/form-validation.js"></script>
+        <script src="assets/js/register.js"></script>
     </body>
 </html>

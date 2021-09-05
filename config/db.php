@@ -5,11 +5,9 @@
  */
 
 require_once dirname(__DIR__, 1) . '/vendor/autoload.php';
+require dirname(__DIR__, 1) . '/middlewares/dotenv.php';
 require dirname(__DIR__, 1) . '/middlewares/session.php';
 
-// load .env file
-$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__, 1));
-$dotenv->safeLoad();
 
 // setup DB connection info
 $DB_HOST = $_ENV['DB_HOST'];
