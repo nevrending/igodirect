@@ -74,6 +74,8 @@ try {
 
         $_SESSION["authenticated"] = true;
         $_SESSION["user"] = $user;
+        $_SESSION["login_time"] = time();
+        $_SESSION["expiry_time"] = $_SESSION["login_time"] + THIRTY_MINUTES_IN_SECONDS;
 
         // redirect to home page
         header('Location: /');

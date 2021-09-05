@@ -51,5 +51,10 @@
                 <p>&copy; 2021 Yefta.com</p>
             </footer>
         </div>
+
+        <script src="assets/js/dashboard.js"></script>
+        <script>
+            session_expiry('<?php echo $_SESSION["expiry_time"]; ?>');
+        </script>
     </body>
 </html>
