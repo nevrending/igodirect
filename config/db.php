@@ -6,7 +6,6 @@
 
 require_once dirname(__DIR__, 1) . '/vendor/autoload.php';
 require dirname(__DIR__, 1) . '/middlewares/dotenv.php';
-require dirname(__DIR__, 1) . '/middlewares/session.php';
 
 
 // setup DB connection info

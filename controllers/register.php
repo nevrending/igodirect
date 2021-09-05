@@ -7,11 +7,12 @@
 require dirname(__DIR__, 1) . '/config/db.php';
 require dirname(__DIR__, 1) . '/middlewares/session.php';
 require dirname(__DIR__, 1) . '/middlewares/csrf.php';
-require dirname(__DIR__, 1) . '/validators/UniqueRule.php';
 require dirname(__DIR__, 1) . '/helpers/functions.php';
+require dirname(__DIR__, 1) . '/validators/UniqueRule.php';
 
 use Rakit\Validation\Validator;
 use Ramsey\Uuid\Uuid;
+use PragmaRX\Google2FAQRCode\Google2FA;
 
 
 // this controller is only allowed to receive POST requests
@@ -77,13 +78,17 @@ try {
         exit;
     }
 
+    // generate 2FA Secret Key
+    $google2fa = new Google2FA();
+    $two_factor_secret = $google2fa->generateSecretKey();
+
     // begin PDO tx
     $pdo->beginTransaction();
 
     // prepare insert statement, to insert registration data
     $statement = $pdo->prepare(
-        "INSERT INTO users (id, name, email, password, address, file_path, created_at, updated_at)
-        VALUES (:id, :name, :email, :password, :address, :file_path, :created_at, :updated_at)"
+        "INSERT INTO users (id, name, email, password, address, file_path, two_factor_secret, created_at, updated_at)
+        VALUES (:id, :name, :email, :password, :address, :file_path, :two_factor_secret, :created_at, :updated_at)"
     );
     $statement->bindParam(':id', $id, PDO::PARAM_STR);
     $statement->bindParam(':name', $name, PDO::PARAM_STR);
@@ -91,6 +96,7 @@ try {
     $statement->bindParam(':password', $password, PDO::PARAM_STR);
     $statement->bindParam(':address', $address, PDO::PARAM_STR);
     $statement->bindParam(':file_path', $file_dest_path, PDO::PARAM_STR);
+    $statement->bindParam(':two_factor_secret', $two_factor_secret, PDO::PARAM_STR);
     $statement->bindParam(':created_at', $created_at, PDO::PARAM_STR);
     $statement->bindParam(':updated_at', $updated_at, PDO::PARAM_STR);
     $statement->execute();
@@ -106,9 +112,10 @@ try {
     $pdo->rollBack();
 
     // on exception, redirect back to Register Form with error message
-    $_SESSION["errors"] = ["<li>Sorry, there is something wrong on our end! Please try again later!</li>"];
-    // for debug
-    // $_SESSION["errors"] = [$e->getMessage()];
+    $_SESSION["errors"] = [
+        "<li>Sorry, there is something wrong on our end! Please try again later!</li>",
+        $e->getMessage()
+    ];
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;
 }

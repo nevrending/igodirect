@@ -3,6 +3,8 @@
         "vlucas/phpdotenv": "^5.3",
         "rakit/validation": "^1.4",
         "ramsey/uuid": "^4.2",
-        "gilbitron/easycsrf": "^1.4"
+        "gilbitron/easycsrf": "^1.4",
+        "pragmarx/google2fa-qrcode": "^3.0",
+        "bacon/bacon-qr-code": "^2.0"
     }
 }

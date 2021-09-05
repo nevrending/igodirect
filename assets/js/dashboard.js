@@ -4,7 +4,6 @@ function session_expiry(expiry) {
   var remind_in = 300; // 5 minutes in seconds
   var interval = setInterval(function() {
     remaining_lifetime--;
-    console.log(remaining_lifetime);
     // check if 5 minutes of session lifetime remaining
     if (remaining_lifetime < remind_in) {
       clearInterval(interval);
