@@ -11,6 +11,7 @@ require dirname(__DIR__, 1) . '/helpers/functions.php';
 require dirname(__DIR__, 1) . '/validators/UniqueRule.php';
 
 use Rakit\Validation\Validator;
+// use EasyCSRF\Exceptions\InvalidCsrfTokenException;
 use Ramsey\Uuid\Uuid;
 use PragmaRX\Google2FAQRCode\Google2FA;
 
@@ -22,12 +23,12 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') !== 'POST') {
 }
 
 // check and prevent XSS/CSRF
-try {
-    $easyCSRF->check('_token', $_POST['_token']);
-} catch (InvalidCsrfTokenException $e) {
-    echo $e->getMessage();
-    exit;
-}
+// try {
+//     $easyCSRF->check('_token', $_POST['_token']);
+// } catch (InvalidCsrfTokenException $e) {
+//     echo $e->getMessage();
+//     exit;
+// }
 
 $validator = new Validator();
 // setup unique validation rule using external custom validator class

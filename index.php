@@ -47,7 +47,6 @@
             <main class="px-3 mb-3">
                 <h1>Welcome back <?php echo $_SESSION["user"]->name ?>!</h1>
                 <p class="lead">Your details</p>
-                <p><?php // var_dump($_SESSION) ?></p>
                 <ul class="text-start">
                     <li>User ID: <?php echo $_SESSION["user"]->id ?></li>
                     <li>Name: <?php echo $_SESSION["user"]->name ?></li>

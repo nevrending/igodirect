@@ -9,7 +9,7 @@ require dirname(__DIR__, 1) . '/middlewares/session.php';
 require dirname(__DIR__, 1) . '/middlewares/csrf.php';
 
 use Rakit\Validation\Validator;
-use EasyCSRF\Exceptions\InvalidCsrfTokenException;
+// use EasyCSRF\Exceptions\InvalidCsrfTokenException;
 use PragmaRX\Google2FAQRCode\Google2FA;
 
 
@@ -20,12 +20,12 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') !== 'POST') {
 }
 
 // check and prevent XSS/CSRF
-try {
-    $easyCSRF->check('_token', $_POST['_token']);
-} catch (InvalidCsrfTokenException $e) {
-    echo $e->getMessage();
-    exit;
-}
+// try {
+//     $easyCSRF->check('_token', $_POST['_token']);
+// } catch (InvalidCsrfTokenException $e) {
+//     echo $e->getMessage();
+//     exit;
+// }
 
 $validator = new Validator();
 
