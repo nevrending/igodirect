@@ -39,6 +39,7 @@
                 <h1 class="h3 mb-3 fw-normal">Two Factor Token</h1>
                 <?php include __DIR__ . '/includes/alerts.inc.php' ?>
                 <div class="form-floating mb-3">
+                    <input type="hidden" name="op" value="verify">
                     <input type="number" class="form-control" name="token" id="token" placeholder="123456" required>
                     <label for="email">Token</label>
                     <div class="invalid-feedback mb-3">
