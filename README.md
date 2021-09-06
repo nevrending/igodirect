@@ -5,7 +5,7 @@
 ## Requirements
 
 1. PHP ^7.4
-2. `bcmath` and `pdo_mysql` extensions
+2. `bcmath` and `pdo_mysql` PHP extensions
 3. MySQL or MariaDB or similar
 4. Composer ^2
 5. Google Maps API Key
@@ -28,6 +28,7 @@ The following can be made as future improvements to this application, including 
 
 1. Account Deletion
 2. 2FA Recovery Codes
+3. Password strength is currently set at minimum of 8 characters for ease of development and testing, but later on it would be better to add requirement that it needs alphanumeric and symbols combination
 
 # Author
 

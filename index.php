@@ -48,13 +48,13 @@
                 <h1>Welcome back <?php echo $_SESSION["user"]->name ?>!</h1>
                 <p class="lead">Your details</p>
                 <ul class="text-start">
-                    <li>User ID: <?php echo $_SESSION["user"]->id ?></li>
-                    <li>Name: <?php echo $_SESSION["user"]->name ?></li>
-                    <li>Email: <?php echo $_SESSION["user"]->email ?></li>
-                    <li>Address: <?php echo $_SESSION["user"]->address ?></li>
-                    <li>Attached File: <?php echo substr($_SESSION["user"]->file_path, 11) ?></li>
-                    <li><embed src="<?php echo substr($_SESSION["user"]->file_path, 3) ?>" width="100%"></li>
+                    <li><strong>User ID:</strong> <?php echo $_SESSION["user"]->id ?></li>
+                    <li><strong>Name:</strong> <?php echo $_SESSION["user"]->name ?></li>
+                    <li><strong>Email:</strong> <?php echo $_SESSION["user"]->email ?></li>
+                    <li><strong>Address:</strong> <?php echo $_SESSION["user"]->address ?></li>
+                    <li><strong>Attached File:</strong> <?php echo substr($_SESSION["user"]->file_path, 11) ?></li>
                 </ul>
+                <embed src="<?php echo substr($_SESSION["user"]->file_path, 3) ?>" width="100%">
                 <hr>
                 <?php if ($_SESSION["user"]->two_factor_enabled) { ?>
                 <p class="lead">Disable 2 Factor Authentication</p>

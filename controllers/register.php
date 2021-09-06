@@ -46,7 +46,10 @@ $validation = $validator->validate($_POST + $_FILES, [
 ]);
 
 if ($validation->fails()) {
-    // validation fails, redirect back to Register Form with error messages
+    // validation fails, redirect back to Register Form with error messages and previous input
+    $_SESSION["old"]["full_name"] = $_POST["full_name"];
+    $_SESSION["old"]["email"] = $_POST["email"];
+    $_SESSION["old"]["address"] = $_POST["address"];
     $_SESSION["errors"] = $validation->errors()->all('<li>:message</li>');
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;

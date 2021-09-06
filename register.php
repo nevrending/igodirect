@@ -38,7 +38,7 @@
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="full_name" class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" name="full_name" id="full_name" required>
+                                    <input type="text" class="form-control" name="full_name" id="full_name" value="<?php echo isset($_SESSION["old"]) ? $_SESSION["old"]["full_name"] : '' ?>" required>
                                     <div class="invalid-feedback">
                                         The full name field is required.
                                     </div>
@@ -46,7 +46,7 @@
 
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com" required>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com" value="<?php echo isset($_SESSION["old"]) ? $_SESSION["old"]["email"] : '' ?>" required>
                                     <div class="invalid-feedback">
                                         Please enter a valid email address.
                                     </div>
@@ -54,23 +54,24 @@
 
                                 <div class="col-12">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password" required>
+                                    <input type="password" class="form-control" name="password" id="password" minlength="8" required>
+                                    <div id="passwordHelp" class="form-text">Minimum length of 8 characters.</div>
                                     <div class="invalid-feedback">
-                                        The password field is required.
+                                        The password field is required or below minimum length.
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <label for="password_confirmation" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required>
+                                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" minlength="8" required>
                                     <div class="invalid-feedback">
-                                        The password confirmation does not match.
+                                        The password confirmation does not match or below minimum length.
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <label for="address" class="form-label">Address</label>
-                                    <input type="text" class="form-control" name="address" id="address" placeholder="1234 Main St" required>
+                                    <input type="text" class="form-control" name="address" id="address" placeholder="1234 Main St" value="<?php echo isset($_SESSION["old"]) ? $_SESSION["old"]["address"] : '' ?>" required>
                                     <div class="invalid-feedback">
                                         Please enter a valid address.
                                     </div>
@@ -78,7 +79,7 @@
 
                                 <div class="col-12">
                                     <?php const ONE_MB_IN_BYTES = 1048576; ?>
-                                    <label for="attach_something" class="form-label">Attach Something <small>(Max size: <?php echo bcdiv(file_upload_max_size(), ONE_MB_IN_BYTES) ?> MB)</small></label>
+                                    <label for="attach_something" class="form-label">Attach Something <small>(Max size: <?php echo bcdiv(file_upload_max_size(), ONE_MB_IN_BYTES) ?> MB - JPEG, PNG, or PDF file)</small></label>
                                     <input type="file" class="form-control" name="attach_something" id="attach_something" accept=".jpg,.jpeg,.png,.pdf" required>
                                     <div class="invalid-feedback">
                                         Please attach a JPEG, PNG, or PDF file.
